@@ -39,7 +39,7 @@ Complete the following steps:
 
 6. Update all the plots when a new sample is selected. Additionally, you are welcome to create any layout that you would like for your dashboard. 
 
-7. Deploy your app to a free static page hosting service, such as GitHub Pages. Submit the links to your deployment and your GitHub repo. Ensure that your repository has regular commits and a thorough README.md file
+7. Deploy your app to a free static page hosting service, such as GitHub Pages. Submit the links to your deployment and your GitHub repo. Ensure that your repository has regular commits and a thorough README.md file.
 
 ### Advanced Challenge (Optional) ###
 The following task is advanced and therefore optional.
