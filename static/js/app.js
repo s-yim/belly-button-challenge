@@ -1,21 +1,3 @@
-// Use D3 library to read in json file from url
-function init(){
-    let selector = d3.select("#selDataset");
-    d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
-        let sampleNames = data.names;
-        
-        for(let i = 0; i < sampleNames.length; i++){
-            selector.append("option").text(sampleNames[i]).property("value", sampleNames[i]);
-        }
-
-        let firstSample = sampleNames[0];
-        buildCharts(firstSample);
-        buildMetadata(firstSample);
-    })
-}
-
-init();
-
 // Create charts
 function buildCharts(sample){
     d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
@@ -78,6 +60,41 @@ function buildCharts(sample){
 // Display sample metadata
 function buildMetadata(sample){
     d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
-        
+        let metadata = data.metadata;
+        let resultArray = metadata.filter(sampleDictionary => sampleDictionary.id == sample);
+        let result = resultArray[0];
+        let PANEL = d3.select("#sample-metadata");
+        PANEL.html("");
+     
+        for(key in result){
+            PANEL.append("h6").text(`${key.toUpperCase()}: ${result[key]}`)
+        }
+     
+        //BONUS
+        buildGauge(result.wfreq);
+     
     })
 }
+
+// Use D3 library to read in json file from url
+function init(){
+    let selector = d3.select("#selDataset");
+    d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
+        let sampleNames = data.names;
+        
+        for(let i = 0; i < sampleNames.length; i++){
+            selector.append("option").text(sampleNames[i]).property("value", sampleNames[i]);
+        }
+
+        let firstSample = sampleNames[0];
+        buildCharts(firstSample);
+        buildMetadata(firstSample);
+    })
+}
+
+function optionChanged(newSample){
+    buildCharts(newSample);
+    buildMetadata(newSample);
+}
+
+init();
